@@ -1,25 +1,70 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import React from "react";
+import Navbar from "./components/Navbar";
+import Product from "./pages/Product";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Searchbar from "./pages/Searchbar";
+// import SearchContextProvider from "./context/SearchqueryContext";
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: (
+        <>
+          <Product url="products" />
+        </>
+      ),
+    },
+    {
+      path: "/electronic",
+      element: (
+        <>
+          {" "}
+          <Product url="products/category/smartphones" />
+        </>
+      ),
+    },
+    {
+      path: "/clothes",
+      element: (
+        <>
+          {" "}
+          <Product url="products/category/mens-shirts" />
+        </>
+      ),
+    },
+    {
+      path: "/furniture",
+      element: (
+        <>
+          <Product url="products/category/furniture" />
+        </>
+      ),
+    },
+    {
+      path: "/sunglasses",
+      element: (
+        <>
+          <Product url="products/category/sunglasses" />
+        </>
+      ),
+    },
+    {
+      path: "/search",
+      element: (
+        <>
+          <Searchbar url="phone" />
+        </>
+      ),
+    },
+  ]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.StrictMode>
+        <div className="App">
+          <Navbar />
+          <RouterProvider router={router} />
+        </div>
+    </React.StrictMode>
   );
 }
-
 export default App;
