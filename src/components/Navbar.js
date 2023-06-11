@@ -4,11 +4,11 @@ import { RxCross2 } from "react-icons/rx";
 import { BsBag } from "react-icons/bs";
 import { AiOutlineSearch } from "react-icons/ai";
 import Slidebar from "./Slidebar";
-// import SearchContext from '../context/SearchqueryContext'
+import SearchContext from "../context/SearchContext";
 
 function Navbar() {
   const [nav, setNav] = useState(true);
-  // const {query, updateQuery} = useContext(SearchContext)
+  const {query, updateQuery} = useContext(SearchContext)
   const [searchTerm, setSearchTerm] = useState("");
   const EventLinks = [
     { Event: "Home", Link: "/", icons: "" },
@@ -22,22 +22,19 @@ function Navbar() {
   };
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
-    console.log(searchTerm);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // onSearch(searchTerm);
   };
 
-  const handleSearchbutton = () => {
-    console.log(searchTerm);
-    // searchTerm='';
+  const handleSearchbutton = (event) => {
+    updateQuery(searchTerm)
     setSearchTerm("");
   };
   return (
     <>
-      <nav className=" bg-black">
+      <nav className="bg-black fixed w-full z-10">
         <div className="max-w-980 h-12 mx-auto text-white flex justify-between pr-3 pl-3">
           <div
             className="flex text-2xl items-center md:hidden transition-colors duration-1000 ease-in-out"
@@ -68,9 +65,9 @@ function Navbar() {
                   onChange={handleChange}
                   className="text-black"
                 />
-                <a href='/search' className="text-white">
+                <a href={`search?q=${query}`} className="text-white">
                   <AiOutlineSearch
-                    type="submit"
+                    // type="submit"
                     onClick={handleSearchbutton}
                   ></AiOutlineSearch>
                 </a>

@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import Product from "./pages/Product";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Searchbar from "./pages/Searchbar";
-// import SearchContextProvider from "./context/SearchqueryContext";
+
 function App() {
   const router = createBrowserRouter([
     {
@@ -53,17 +53,17 @@ function App() {
       path: "/search",
       element: (
         <>
-          <Searchbar url="phone" />
+          <Searchbar />
         </>
       ),
     },
   ]);
   return (
     <React.StrictMode>
-        <div className="App">
-          <Navbar />
-          <RouterProvider router={router} />
-        </div>
+      <div className="App">
+        <Navbar />
+        <RouterProvider router={router} />
+      </div>
     </React.StrictMode>
   );
 }

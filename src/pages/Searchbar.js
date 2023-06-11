@@ -1,24 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Loader from "../components/loader";
+import SearchContext from "../context/SearchContext";
 
 function Searchbar(props) {
   const [products, setProducts] = useState([]);
+  const { updateQuery } = useContext(SearchContext);
+  const savequery = localStorage.getItem("query");
   useEffect(() => {
+    if (savequery) {
+      updateQuery(savequery);
+    }
     const fetchdata = () => {
       axios
-        .get(`https://dummyjson.com/products/search?q=${props.url}`)
+        .get(`https://dummyjson.com/products/search?q=${savequery}`)
         .then((res) => {
           setProducts(res.data.products);
         });
     };
     fetchdata();
-  });
+  }, []);
   return (
     <>
       <div className="product">
         <section className="filter">hbj</section>
-        {products.length == 0 ? (
+        {products.length === 0 ? (
           <Loader />
         ) : (
           <>
@@ -27,7 +33,7 @@ function Searchbar(props) {
               {products.map((item) => {
                 return (
                   <>
-                    <div className="card">
+                    <div className="card" key={item.id}>
                       <div className="image">
                         <img src={item.thumbnail} alt="loading" />
                       </div>
