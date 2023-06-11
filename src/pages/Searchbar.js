@@ -2,11 +2,44 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Loader from "../components/loader";
 import SearchContext from "../context/SearchContext";
+import Filter from "./Filter";
+import FilterProductContext from "../context/FilterProductContext";
 
 function Searchbar(props) {
   const [products, setProducts] = useState([]);
   const { updateQuery } = useContext(SearchContext);
+  const [filteredProducts, updateProduct] = useState([]);
+  const {
+    selectedPriceRange,
+    selectedRatingRange,
+    selectPriceSort,
+    handlePriceSort,
+  } = useContext(FilterProductContext);
+
   const savequery = localStorage.getItem("query");
+  useEffect(() => {
+    const filtered = products.filter((product) => {
+      const [minPrice, maxPrice] = selectedPriceRange.split("-");
+      const [minRating, maxRating] = selectedRatingRange.split("-");
+      return (
+        product.price >= Number(minPrice) &&
+        product.price <= Number(maxPrice) &&
+        product.rating >= Number(minRating) &&
+        product.rating <= Number(maxRating)
+      );
+    });
+    handlePriceSort("none");
+    updateProduct(filtered);
+  }, [products, selectedPriceRange, selectedRatingRange]);
+
+  useEffect(() => {
+    if (selectPriceSort === "incr") {
+      updateProduct([...filteredProducts].sort((a, b) => a.price - b.price));
+    }
+    if (selectPriceSort === "decr") {
+      updateProduct([...filteredProducts].sort((a, b) => b.price - a.price));
+    }
+  }, [selectPriceSort]);
   useEffect(() => {
     if (savequery) {
       updateQuery(savequery);
@@ -23,14 +56,16 @@ function Searchbar(props) {
   return (
     <>
       <div className="product">
-        <section className="filter">hbj</section>
+        <Filter />
         {products.length === 0 ? (
-          <Loader />
+          <section className="InfiniteScroll">
+            <Loader />
+          </section>
         ) : (
           <>
             {" "}
-            <section className="carditems">
-              {products.map((item) => {
+            <section className="carditems InfiniteScroll">
+              {filteredProducts.map((item) => {
                 return (
                   <>
                     <div className="card" key={item.id}>

@@ -40,11 +40,13 @@ body {
     background-color: #fff;
     font-size: 14px;
 }
-.InfiniteScroll{
+
+.InfiniteScroll {
     position: relative;
     top: 10vh;
     left: 15vw;
 }
+
 .product .carditems {
     display: grid;
     width: 80vw;
@@ -144,19 +146,51 @@ button:hover {
 }
 
 @media screen and (max-width: 1600px) {
+    .InfiniteScroll {
+        position: relative;
+        top: 10vh;
+        left: 15vw;
+    }
+
     .product .carditems {
         grid-template-columns: auto auto auto;
     }
 }
 
 @media screen and (max-width: 1300px) {
+    .InfiniteScroll {
+        position: relative;
+        top: 10vh;
+        left: 15vw;
+    }
+
     .product .carditems {
         grid-template-columns: auto auto;
     }
 }
 
 @media screen and (max-width: 600px) {
+    .InfiniteScroll {
+        position: relative;
+        top: 10vh;
+        left: 0;
+        right: 0;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .product {
+        display: flex;
+        justify-content: space-around;
+    }
+
     .product .carditems {
         grid-template-columns: auto;
+
+    }
+    #logo{
+        display: none;
     }
 }

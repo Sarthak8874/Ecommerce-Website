@@ -42,7 +42,7 @@ function Navbar() {
           >
             {nav ? <IoMenuOutline /> : <RxCross2 />}
           </div>
-          <div className="flex h-full items-center">
+          <div className="flex h-full items-center" id="logo">
             <img alt="loding" src="/jfnj" className=""></img>
           </div>
           <div className="hidden md:block">
@@ -55,7 +55,7 @@ function Navbar() {
             </ul>
           </div>
           <div className="flex max-w-10 justify-between h-full items-center">
-            <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
               <div className="flex">
                 {" "}
                 <input
@@ -63,16 +63,19 @@ function Navbar() {
                   placeholder="Search..."
                   value={searchTerm}
                   onChange={handleChange}
-                  className="text-black"
+                  className=" text-black px-2 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <a href={`search?q=${query}`} className="text-white">
                   <AiOutlineSearch
                     // type="submit"
+                    className="inline-block align-middle text-xl"
                     onClick={handleSearchbutton}
                   ></AiOutlineSearch>
                 </a>
               </div>
             </form>
+          </div>
+          <div className="flex max-w-10 justify-between h-full items-center">
             <div className="ml-2 mr-2">
               <BsBag />
             </div>
