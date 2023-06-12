@@ -48,7 +48,7 @@ function Navbar() {
           <div className="hidden md:block">
             <ul className="flex h-full items-center">
               {EventLinks.map((EventLinks) => (
-                <a href={EventLinks.Link} className="pl-2 pr-2">
+                <a href={EventLinks.Link} className="pl-2 pr-2" key={EventLinks.Link}>
                   <li className="">{EventLinks.Event}</li>
                 </a>
               ))}
@@ -76,9 +76,11 @@ function Navbar() {
             </form>
           </div>
           <div className="flex max-w-10 justify-between h-full items-center">
+            <a href="/cart">
             <div className="ml-2 mr-2">
               <BsBag />
             </div>
+            </a>
           </div>
         </div>
       </nav>

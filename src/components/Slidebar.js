@@ -18,7 +18,7 @@ function Slidebar(props) {
       >
         <ul className="w-full text-2xl text-white">
           {EventLinks.map((EventLinks) => (
-            <a href={EventLinks.Link} className="">
+            <a href={EventLinks.Link} className="" key={EventLinks.Link}>
               <li style={{ borderBottom: "1px solid gray" }} className="h-10">
                 {EventLinks.Event}
               </li>

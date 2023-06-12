@@ -7,11 +7,11 @@ const FilterProductContextProvider = ({ children }) => {
   const [selectPriceSort, setselectPriceSort] = useState("none");
   
   const handlePriceRangeChange = (event) => {
-    setSelectedPriceRange(event.target.value);
+    setSelectedPriceRange((event.target)?event.target.value : event);
   };
 
   const handleRatingRangeChange = (event) => {
-    setSelectedRatingRange(event.target.value);
+    setSelectedRatingRange((event.target)?event.target.value : event);
   };
 
   const handlePriceSort = (event) => {

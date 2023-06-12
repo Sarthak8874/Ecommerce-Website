@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Product from "./pages/Product";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Searchbar from "./pages/Searchbar";
+import Cart from "./pages/Cart";
 
 function App() {
   const router = createBrowserRouter([
@@ -54,6 +55,14 @@ function App() {
       element: (
         <>
           <Searchbar />
+        </>
+      ),
+    },
+    {
+      path: "/cart",
+      element: (
+        <>
+          <Cart/>
         </>
       ),
     },

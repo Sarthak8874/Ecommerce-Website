@@ -10,10 +10,13 @@ function Product(props) {
   const [filteredProducts, updateProduct] = useState([]);
   const {
     selectedPriceRange,
+    handlePriceRangeChange,
     selectedRatingRange,
+    handleRatingRangeChange,
     selectPriceSort,
     handlePriceSort,
   } = useContext(FilterProductContext);
+  
   const [hastofetchmore, sethastofetchmore] = useState(true);
   const [skip, setskip] = useState(0);
 
@@ -47,6 +50,9 @@ function Product(props) {
         .then((res) => {
           setProducts(products.concat(res.data.products));
           sethastofetchmore(res.data.total - products.length - 6 > 0);
+          handlePriceSort("none");
+          handlePriceRangeChange("0-20000");
+          handleRatingRangeChange("0-5");
         });
     };
     fetchdata();
@@ -75,7 +81,7 @@ function Product(props) {
             {filteredProducts.map((item) => {
               return (
                 <>
-                  <div className="card">
+                  <div className="card" key={item.thumbnail+item.id}>
                     <div className="image">
                       <img src={item.thumbnail} alt="loading" />
                     </div>

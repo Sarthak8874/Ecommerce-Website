@@ -145,6 +145,146 @@ button:hover {
 
 }
 
+
+/* Cart */
+.cartpage {
+    position: relative;
+    top: 10vh;
+    margin: 0 5vw;
+}
+
+#cart {
+    overflow-x: auto;
+}
+
+#cart table {
+    width: 1000px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    white-space: nowrap;
+}
+
+#cart table img {
+    width: 70px;
+}
+
+#cart table td:nth-child(1) {
+    width: 100px;
+    text-align: center;
+}
+
+#cart table td:nth-child(2) {
+    width: 150px;
+    text-align: center;
+}
+
+#cart table td:nth-child(3) {
+    width: 250px;
+    text-align: center;
+}
+
+#cart table td:nth-child(4) {
+    width: 150px;
+    text-align: center;
+}
+
+#cart table td:nth-child(5) input {
+    width: 70px;
+    padding: 10px 5x 10px 15px;
+}
+
+#cart table td:nth-child(6) {
+    width: 150px;
+    text-align: center;
+}
+
+
+#cart table thead {
+    border: 1px solid #e2e9e1;
+    border-left: none;
+    border-right: none;
+
+}
+
+#cart table thead td {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 13px;
+    padding: 18px 0;
+}
+
+#cart table tbody tr td {
+    padding-top: 15px;
+}
+
+#cart table tbody td {
+    font-size: 13px;
+}
+
+#cart-add {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5rem;
+    justify-content: space-between;
+}
+
+#coupon {
+    width: 50%;
+    margin-bottom: 30px;
+}
+
+#coupon h3,
+#subtotal h3 {
+    padding-bottom: 15px;
+}
+
+#coupon input {
+    padding: 10px 20px;
+    outline: none;
+    width: 60%;
+    margin-right: 10px;
+    border: 1px solid #e2e9e1;
+}
+
+#coupon button {
+    background-color: #2f3131;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+}
+#coupon button:hover{
+    background-color: #000000;
+}
+#subtotal {
+    width: 50%;
+    margin-bottom: 30px;
+    border: 1px solid #e2e9e1;
+    padding: 30px;
+}
+
+#subtotal table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#subtotal table td {
+    width: 50%;
+    border: 1px solid #e2e9e1;
+    padding: 10px;
+    font-size: 13px;
+}
+#subtotal button {
+    background-color: #2f3131;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    width: 50%;
+}
+#subtotal button:hover{
+    background-color: #000000;
+}
+
 @media screen and (max-width: 1600px) {
     .InfiniteScroll {
         position: relative;
@@ -190,7 +330,21 @@ button:hover {
         grid-template-columns: auto;
 
     }
-    #logo{
+
+    #logo {
         display: none;
+    }
+
+    #cart-add {
+        flex-direction: column;
+    }
+
+    #coupon {
+        width: 100%;
+    }
+
+    #subtotal {
+        width: 100%;
+        padding: 20px;
     }
 }
