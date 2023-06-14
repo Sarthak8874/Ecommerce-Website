@@ -120,29 +120,26 @@ body {
     height: 2rem;
 }
 
-button {
-
+.addremovebutton {
     outline: 0;
     border: 0;
-    background: none;
-    border: 1px solid #d9d9d9;
-    padding: 8px 0px;
-    color: #515151;
+    width: auto;
+    padding: .25rem 1rem;
+    background-color: #2f3131;
+    color: #fff;
     text-transform: uppercase;
-    width: 125px;
     font-family: inherit;
-    margin-right: 5px;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     font-weight: 500;
+    border-radius: 8px;
 }
 
-button:hover {
-
-    background: darken(white, 2%);
-    border: 1px solid #aedaa6;
-    color: #aedaa6;
+.addremovebutton:hover {
+    background-color: #000000;
+    border: 1px rgb(59, 130, 246);
+    color: #fff;
     cursor: pointer;
-
+    border: 1px;
 }
 
 
@@ -252,9 +249,11 @@ button:hover {
     padding: 12px 20px;
     border: none;
 }
-#coupon button:hover{
+
+#coupon button:hover {
     background-color: #000000;
 }
+
 #subtotal {
     width: 50%;
     margin-bottom: 30px;
@@ -274,6 +273,7 @@ button:hover {
     padding: 10px;
     font-size: 13px;
 }
+
 #subtotal button {
     background-color: #2f3131;
     color: #fff;
@@ -281,7 +281,8 @@ button:hover {
     border: none;
     width: 50%;
 }
-#subtotal button:hover{
+
+#subtotal button:hover {
     background-color: #000000;
 }
 

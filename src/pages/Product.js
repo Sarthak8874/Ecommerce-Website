@@ -4,6 +4,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Loader from "../components/loader";
 import Filter from "./Filter";
 import FilterProductContext from "../context/FilterProductContext";
+import CartContext from "../context/CartContext";
 
 function Product(props) {
   const [products, setProducts] = useState([]);
@@ -16,7 +17,10 @@ function Product(props) {
     selectPriceSort,
     handlePriceSort,
   } = useContext(FilterProductContext);
-  
+  const {
+    state: { cart },
+    dispatch,
+  } = useContext(CartContext);
   const [hastofetchmore, sethastofetchmore] = useState(true);
   const [skip, setskip] = useState(0);
 
@@ -44,17 +48,17 @@ function Product(props) {
     }
   }, [selectPriceSort]);
 
-  useEffect(()=>{
+  useEffect(() => {
     axios
-    .get(`https://dummyjson.com/${props.url}?limit=6&skip=0`)
-    .then((res) => {
-      setProducts(res.data.products);
-      sethastofetchmore(res.data.total - products.length - 6 > 0);
-      handlePriceSort("none");
-      handlePriceRangeChange("0-20000");
-      handleRatingRangeChange("0-5");
-    });
-  },[props.url])
+      .get(`https://dummyjson.com/${props.url}?limit=6&skip=0`)
+      .then((res) => {
+        setProducts(res.data.products);
+        sethastofetchmore(res.data.total - products.length - 6 > 0);
+        handlePriceSort("none");
+        handlePriceRangeChange("0-20000");
+        handleRatingRangeChange("0-5");
+      });
+  }, [props.url]);
   useEffect(() => {
     const fetchdata = () => {
       axios
@@ -93,7 +97,7 @@ function Product(props) {
             {filteredProducts.map((item) => {
               return (
                 <>
-                  <div className="card" key={item.thumbnail+item.id}>
+                  <div className="card" key={item.thumbnail + item.id}>
                     <div className="image">
                       <img src={item.thumbnail} alt="loading" />
                     </div>
@@ -110,7 +114,25 @@ function Product(props) {
                           : item.description}
                       </p>
                       <div className="button flex justify-center">
-                        <button>Add to Cart</button>
+                        {cart.some((c) => c.id === item.id) ? (
+                          <button
+                            className="w-auto addremovebutton"
+                            onClick={() => {
+                              dispatch({ type: "REMOVE", payload: item });
+                            }}
+                          >
+                            Remove From Cart
+                          </button>
+                        ) : (
+                          <button
+                            className="w-auto addremovebutton "
+                            onClick={() => {
+                              dispatch({ type: "ADD", payload: item });
+                            }}
+                          >
+                            Add to Cart
+                          </button>
+                        )}
                         {/* <button>Wishlist</button> */}
                       </div>
                     </div>

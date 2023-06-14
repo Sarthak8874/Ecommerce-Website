@@ -77,11 +77,11 @@ function Navbar() {
             </form>
           </div>
           <div className="flex max-w-10 justify-between h-full items-center">
-            <a href="/cart">
+            <Link to="/cart">
               <div className="ml-2 mr-2">
                 <BsBag />
               </div>
-            </a>
+            </Link>
           </div>
         </div>
       </nav>

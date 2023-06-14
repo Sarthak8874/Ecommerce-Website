@@ -5,7 +5,7 @@ import Filter from "./Filter";
 import FilterProductContext from "../context/FilterProductContext";
 import SearchContext from "../context/SearchContext";
 
-function Searchbar(props) {
+function Searchbar() {
   const [products, setProducts] = useState([]);
   const [filteredProducts, updateProduct] = useState([]);
   const { query } = useContext(SearchContext);
