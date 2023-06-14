@@ -3,10 +3,12 @@ import axios from "axios";
 import Loader from "../components/loader";
 import Filter from "./Filter";
 import FilterProductContext from "../context/FilterProductContext";
+import SearchContext from "../context/SearchContext";
 
 function Searchbar(props) {
   const [products, setProducts] = useState([]);
   const [filteredProducts, updateProduct] = useState([]);
+  const { query } = useContext(SearchContext);
   const {
     selectedPriceRange,
     selectedRatingRange,
@@ -14,7 +16,6 @@ function Searchbar(props) {
     handlePriceSort,
   } = useContext(FilterProductContext);
 
-  const savequery = localStorage.getItem("query");
   useEffect(() => {
     const filtered = products.filter((product) => {
       const [minPrice, maxPrice] = selectedPriceRange.split("-");
@@ -39,17 +40,15 @@ function Searchbar(props) {
     }
   }, [selectPriceSort]);
   useEffect(() => {
-    if (savequery) {
-    }
     const fetchdata = () => {
       axios
-        .get(`https://dummyjson.com/products/search?q=${savequery}`)
+        .get(`https://dummyjson.com/products/search?q=${query}`)
         .then((res) => {
           setProducts(res.data.products);
         });
     };
     fetchdata();
-  }, []);
+  }, [query]);
   return (
     <>
       <div className="product">

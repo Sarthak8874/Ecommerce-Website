@@ -4,10 +4,14 @@ import { RxCross2 } from "react-icons/rx";
 import { BsBag } from "react-icons/bs";
 import { AiOutlineSearch } from "react-icons/ai";
 import Slidebar from "./Slidebar";
+import { Link } from "react-router-dom";
+import SearchContext from "../context/SearchContext";
 
 function Navbar() {
   const [nav, setNav] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const { query, updateQuery } = useContext(SearchContext);
+
   const EventLinks = [
     { Event: "Home", Link: "/", icons: "" },
     { Event: "Clothes", Link: "/clothes", icons: "" },
@@ -21,13 +25,9 @@ function Navbar() {
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
-
-  const handleSubmit = (event) => {
-    // event.preventDefault();
-  };
-
   const handleSearchbutton = (event) => {
     localStorage.setItem("query", searchTerm);
+    updateQuery(searchTerm);
     setSearchTerm("");
   };
   return (
@@ -46,14 +46,18 @@ function Navbar() {
           <div className="hidden md:block">
             <ul className="flex h-full items-center">
               {EventLinks.map((EventLinks) => (
-                <a href={EventLinks.Link} className="pl-2 pr-2" key={EventLinks.Link}>
+                <Link
+                  to={EventLinks.Link}
+                  className="pl-2 pr-2"
+                  key={EventLinks.Link}
+                >
                   <li className="">{EventLinks.Event}</li>
-                </a>
+                </Link>
               ))}
             </ul>
           </div>
           <div className="flex max-w-10 justify-between h-full items-center">
-          <form onSubmit={handleSubmit}>
+            <form>
               <div className="flex">
                 {" "}
                 <input
@@ -63,21 +67,20 @@ function Navbar() {
                   onChange={handleChange}
                   className=" text-black px-2 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-                <a href={`search`} className="text-white">
+                <Link to="/search" className="text-white">
                   <AiOutlineSearch
-                    // type="submit"
                     className="inline-block align-middle text-xl"
                     onClick={handleSearchbutton}
                   ></AiOutlineSearch>
-                </a>
+                </Link>
               </div>
             </form>
           </div>
           <div className="flex max-w-10 justify-between h-full items-center">
             <a href="/cart">
-            <div className="ml-2 mr-2">
-              <BsBag />
-            </div>
+              <div className="ml-2 mr-2">
+                <BsBag />
+              </div>
             </a>
           </div>
         </div>

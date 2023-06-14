@@ -43,6 +43,18 @@ function Product(props) {
       updateProduct([...filteredProducts].sort((a, b) => b.price - a.price));
     }
   }, [selectPriceSort]);
+
+  useEffect(()=>{
+    axios
+    .get(`https://dummyjson.com/${props.url}?limit=6&skip=0`)
+    .then((res) => {
+      setProducts(res.data.products);
+      sethastofetchmore(res.data.total - products.length - 6 > 0);
+      handlePriceSort("none");
+      handlePriceRangeChange("0-20000");
+      handleRatingRangeChange("0-5");
+    });
+  },[props.url])
   useEffect(() => {
     const fetchdata = () => {
       axios
