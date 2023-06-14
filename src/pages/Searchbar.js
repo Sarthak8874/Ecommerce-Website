@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Loader from "../components/loader";
-import SearchContext from "../context/SearchContext";
 import Filter from "./Filter";
 import FilterProductContext from "../context/FilterProductContext";
 
 function Searchbar(props) {
   const [products, setProducts] = useState([]);
-  const { updateQuery } = useContext(SearchContext);
   const [filteredProducts, updateProduct] = useState([]);
   const {
     selectedPriceRange,
@@ -42,7 +40,6 @@ function Searchbar(props) {
   }, [selectPriceSort]);
   useEffect(() => {
     if (savequery) {
-      updateQuery(savequery);
     }
     const fetchdata = () => {
       axios

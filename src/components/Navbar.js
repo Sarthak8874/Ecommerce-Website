@@ -4,11 +4,9 @@ import { RxCross2 } from "react-icons/rx";
 import { BsBag } from "react-icons/bs";
 import { AiOutlineSearch } from "react-icons/ai";
 import Slidebar from "./Slidebar";
-import SearchContext from "../context/SearchContext";
 
 function Navbar() {
   const [nav, setNav] = useState(true);
-  const {query, updateQuery} = useContext(SearchContext)
   const [searchTerm, setSearchTerm] = useState("");
   const EventLinks = [
     { Event: "Home", Link: "/", icons: "" },
@@ -25,11 +23,11 @@ function Navbar() {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
   };
 
   const handleSearchbutton = (event) => {
-    updateQuery(searchTerm)
+    localStorage.setItem("query", searchTerm);
     setSearchTerm("");
   };
   return (
@@ -65,7 +63,7 @@ function Navbar() {
                   onChange={handleChange}
                   className=" text-black px-2 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-                <a href={`search?q=${query}`} className="text-white">
+                <a href={`search`} className="text-white">
                   <AiOutlineSearch
                     // type="submit"
                     className="inline-block align-middle text-xl"
