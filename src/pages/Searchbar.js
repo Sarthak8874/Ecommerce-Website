@@ -9,6 +9,7 @@ import CartContext from "../context/CartContext";
 function Searchbar() {
   const [products, setProducts] = useState([]);
   const [filteredProducts, updateProduct] = useState([]);
+  const [hasProduct, sethasProduct] = useState(true);
   const {
     state: { cart },
     dispatch,
@@ -50,17 +51,29 @@ function Searchbar() {
         .get(`https://dummyjson.com/products/search?q=${query}`)
         .then((res) => {
           setProducts(res.data.products);
+          if (res.data.total === 0) {
+            sethasProduct(false);
+          }
         });
     };
     fetchdata();
   }, [query]);
+  document.title = `ShopSmart-Search`;
   return (
     <>
       <div className="product">
         <Filter />
         {products.length === 0 ? (
           <section className="InfiniteScroll">
-            <Loader />
+            {!hasProduct ? (
+              <p className="text-center m-5">
+                <b>
+                  No products found. Please try searching for another product.
+                </b>
+              </p>
+            ) : (
+              <Loader />
+            )}
           </section>
         ) : (
           <>
@@ -105,7 +118,6 @@ function Searchbar() {
                               Add to Cart
                             </button>
                           )}
-                          {/* <button>Wishlist</button> */}
                         </div>
                       </div>
                     </div>

@@ -6,7 +6,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import Slidebar from "./Slidebar";
 import { Link } from "react-router-dom";
 import SearchContext from "../context/SearchContext";
-
+import logo from "../ShopSmartLogo.png";
 function Navbar() {
   const [nav, setNav] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
@@ -41,7 +41,9 @@ function Navbar() {
             {nav ? <IoMenuOutline /> : <RxCross2 />}
           </div>
           <div className="flex h-full items-center" id="logo">
-            <img alt="loding" src="/jfnj" className=""></img>
+            <Link to="/">
+              <img alt="loding" src={logo} className="w-14 h-10"></img>
+            </Link>
           </div>
           <div className="hidden md:block">
             <ul className="flex h-full items-center">

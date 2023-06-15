@@ -17,7 +17,7 @@ function App() {
               path="/"
               element={
                 <>
-                  <Product url="products" />
+                  <Product url="products" title="" />
                 </>
               }
             />
@@ -26,7 +26,10 @@ function App() {
               element={
                 <>
                   {" "}
-                  <Product url="products/category/smartphones" />
+                  <Product
+                    url="products/category/smartphones"
+                    title="-Electronic"
+                  />
                 </>
               }
             />
@@ -35,7 +38,10 @@ function App() {
               element={
                 <>
                   {" "}
-                  <Product url="products/category/mens-shirts" />
+                  <Product
+                    url="products/category/mens-shirts"
+                    title="-Clothes"
+                  />
                 </>
               }
             />
@@ -43,7 +49,10 @@ function App() {
               path="/furniture"
               element={
                 <>
-                  <Product url="products/category/furniture" />
+                  <Product
+                    url="products/category/furniture"
+                    title="-Furniture"
+                  />
                 </>
               }
             />
@@ -51,7 +60,10 @@ function App() {
               path="/sunglasses"
               element={
                 <>
-                  <Product url="products/category/sunglasses" />
+                  <Product
+                    url="products/category/sunglasses"
+                    title="-Sunglasses"
+                  />
                 </>
               }
             />
