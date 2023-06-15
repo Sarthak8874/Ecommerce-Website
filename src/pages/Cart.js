@@ -12,6 +12,7 @@ function Cart() {
       cart.reduce((acc, curr) => acc + Number(curr.price) * Number(curr.qty), 0)
     );
   }, [cart]);
+  document.title = "ShopSmart-Cart";
   return (
     <>
       <div className="cartpage">
@@ -28,46 +29,54 @@ function Cart() {
               </tr>
             </thead>
             <tbody>
-              {cart.map((item) => {
-                return (
-                  <>
-                    <tr>
-                      <td>
-                        <RemoveCircleOutlineIcon
-                          onClick={() => {
-                            dispatch({ type: "REMOVE", payload: item });
-                          }}
-                        ></RemoveCircleOutlineIcon>
-                      </td>
-                      <td>
-                        <img src={item.thumbnail} alt="" srcset="" />
-                      </td>
-                      <td>
-                        {" "}
-                        {item.title.length > 20
-                          ? item.title.substr(0, 20) + "..."
-                          : item.title}
-                      </td>
-                      <td>${item.price}</td>
-                      <td>
-                        <input
-                          type="number"
-                          value={item.qty}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "Changeqty",
-                              payload: item,
-                              qty: e.target.value,
-                            });
-                          }}
-                          className="border border-solid border-black p-1"
-                        />
-                      </td>
-                      <td>${item.price * item.qty}</td>
-                    </tr>
-                  </>
-                );
-              })}
+              {cart.length === 0 ? (
+                <p className="text-center m-5">
+                  <b>
+                    No products added to the cart. Please add some products.
+                  </b>
+                </p>
+              ) : (
+                cart.map((item) => {
+                  return (
+                    <>
+                      <tr>
+                        <td>
+                          <RemoveCircleOutlineIcon
+                            onClick={() => {
+                              dispatch({ type: "REMOVE", payload: item });
+                            }}
+                          ></RemoveCircleOutlineIcon>
+                        </td>
+                        <td>
+                          <img src={item.thumbnail} alt="" srcset="" />
+                        </td>
+                        <td>
+                          {" "}
+                          {item.title.length > 20
+                            ? item.title.substr(0, 20) + "..."
+                            : item.title}
+                        </td>
+                        <td>${item.price}</td>
+                        <td>
+                          <input
+                            type="number"
+                            value={item.qty}
+                            onChange={(e) => {
+                              dispatch({
+                                type: "Changeqty",
+                                payload: item,
+                                qty: e.target.value,
+                              });
+                            }}
+                            className="border border-solid border-black p-1"
+                          />
+                        </td>
+                        <td>${item.price * item.qty}</td>
+                      </tr>
+                    </>
+                  );
+                })
+              )}
             </tbody>
           </table>
         </section>

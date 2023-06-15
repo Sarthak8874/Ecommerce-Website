@@ -73,7 +73,7 @@ function Product(props) {
     };
     fetchdata();
   }, [skip]);
-
+  document.title = `ShopSmart${props.title ? props.title : ""}`;
   const fetchmore = () => {
     setskip(skip + 6);
   };
