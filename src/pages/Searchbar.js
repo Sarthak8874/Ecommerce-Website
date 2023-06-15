@@ -4,10 +4,15 @@ import Loader from "../components/loader";
 import Filter from "./Filter";
 import FilterProductContext from "../context/FilterProductContext";
 import SearchContext from "../context/SearchContext";
+import CartContext from "../context/CartContext";
 
 function Searchbar() {
   const [products, setProducts] = useState([]);
   const [filteredProducts, updateProduct] = useState([]);
+  const {
+    state: { cart },
+    dispatch,
+  } = useContext(CartContext);
   const { query } = useContext(SearchContext);
   const {
     selectedPriceRange,
@@ -80,9 +85,27 @@ function Searchbar() {
                             ? item.description.substr(0, 50) + "..."
                             : item.description}
                         </p>
-                        <div className="button">
-                          <button>Add to Cart</button>
-                          <button>Wishlist</button>
+                        <div className="button flex justify-center">
+                          {cart.some((c) => c.id === item.id) ? (
+                            <button
+                              className="w-auto addremovebutton"
+                              onClick={() => {
+                                dispatch({ type: "REMOVE", payload: item });
+                              }}
+                            >
+                              Remove From Cart
+                            </button>
+                          ) : (
+                            <button
+                              className="w-auto addremovebutton "
+                              onClick={() => {
+                                dispatch({ type: "ADD", payload: item });
+                              }}
+                            >
+                              Add to Cart
+                            </button>
+                          )}
+                          {/* <button>Wishlist</button> */}
                         </div>
                       </div>
                     </div>

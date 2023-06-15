@@ -10,7 +10,7 @@ import SearchContext from "../context/SearchContext";
 function Navbar() {
   const [nav, setNav] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
-  const { query, updateQuery } = useContext(SearchContext);
+  const { updateQuery } = useContext(SearchContext);
 
   const EventLinks = [
     { Event: "Home", Link: "/", icons: "" },
